@@ -67,7 +67,7 @@ $ exit
 
 ## File Structure
 
-- `shell.c` - Main shell implementation
+- `main.c` - Main shell implementation
 - `builtins.c` - Built-in command handlers
 - `helpers.c` - Helper functions (PATH resolution, etc.)
 - `shell.h` - Header file with function prototypes
