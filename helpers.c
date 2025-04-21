@@ -6,8 +6,10 @@
  *
  * Return: Array of arguments (must be freed by caller)
  */
+
 char **split_line(char *line)
 {
+	/*initialize buffer and allocate memory for an array of strings*/
     int bufsize = MAX_ARGS, position = 0;
     char **tokens = malloc(bufsize * sizeof(char*));
     char *token;
@@ -16,12 +18,13 @@ char **split_line(char *line)
         fprintf(stderr, "Allocation error\n");
         exit(EXIT_FAILURE);
     }
-
+	/*tokanize (break a line of tokens from delimiters)*/
     token = strtok(line, " \t\r\n\a");
     while (token != NULL) {
         tokens[position] = token;
         position++;
-
+		
+		/*resize if necessary*/
         if (position >= bufsize) {
             bufsize += MAX_ARGS;
             tokens = realloc(tokens, bufsize * sizeof(char*));
@@ -33,6 +36,7 @@ char **split_line(char *line)
 
         token = strtok(NULL, " \t\r\n\a");
     }
+	/*terminate with NULL as required by execvp() style functions*/
     tokens[position] = NULL;
     return tokens;
 }

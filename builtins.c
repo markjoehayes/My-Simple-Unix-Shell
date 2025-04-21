@@ -6,7 +6,7 @@
 
 void print_environment(void)
 {
-    char **env = environ;
+    char **env = environ;   /*environ - points to the env variables*/
     while (*env) {
         printf("%s\n", *env);
         env++;
