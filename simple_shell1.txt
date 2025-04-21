@@ -1,0 +1,105 @@
+# SIMPLE_SHELL(1) - User Commands Manual
+
+## NAME
+
+**simple_shell** - a simple UNIX command interpreter
+
+## SYNOPSIS
+
+**simple_shell** [*OPTION*]... 
+
+## DESCRIPTION
+
+**simple_shell** is a basic implementation of a UNIX shell that reads commands from either standard input or a file and executes them. It supports executing programs found in the PATH environment variable and includes built-in commands.
+
+## OPTIONS
+
+The shell does not accept any command-line options. All interaction happens through the interactive prompt or standard input.
+
+## BUILT-IN COMMANDS
+
+The shell supports the following built-in commands:
+
+- **exit**  
+  Exits the shell.  
+  *Syntax*: `exit`
+
+- **env**  
+  Prints all environment variables.  
+  *Syntax*: `env`
+
+## COMMAND EXECUTION
+
+The shell executes non-built-in commands by:
+
+1. Searching for the command in the directories specified by the PATH environment variable
+2. Forking a child process
+3. Executing the command using execve(2)
+4. Waiting for the command to complete before displaying the prompt again
+
+## EXIT STATUS
+
+The shell exits with status:
+
+- **0** - Successful execution or exit command
+- **1** - General error
+- **127** - Command not found
+
+## ENVIRONMENT
+
+The shell inherits and maintains the environment of the parent process. The following environment variables affect shell operation:
+
+- **PATH**  
+  Colon-separated list of directories to search for commands
+
+## EXAMPLES
+
+1. Start the shell interactively:
+   ```
+   $ ./simple_shell
+   $ ls
+   file1.txt file2.txt
+   $ exit
+   ```
+
+2. Execute a single command:
+   ```
+   $ echo "ls" | ./simple_shell
+   ```
+
+3. View environment variables:
+   ```
+   $ ./simple_shell
+   $ env
+   USER=john
+   HOME=/home/john
+   PATH=/usr/local/bin:/usr/bin:/bin
+   ```
+
+## BUGS
+
+No known bugs. Report any issues to the maintainers.
+
+## AUTHOR
+
+Written by [Your Name].
+
+## COPYRIGHT
+
+Copyright © 2023 [Your Organization].  
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## SEE ALSO
+
+sh(1), bash(1), execve(2), fork(2)
+
+## NOTES
+
+This simple shell does not support:
+- Pipes or redirections
+- Shell scripting constructs
+- Command line editing
+- Job control
+- Aliases or shell functions
+
+For a full-featured shell, use bash(1) or similar.
