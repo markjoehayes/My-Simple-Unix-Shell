@@ -18,7 +18,6 @@ This is a simple UNIX command line interpreter (shell) written in C. The shell s
 ## Requirements
 
 - GCC compiler
-- GNU Make (optional)
 - Linux/Unix environment
 
 ## Installation
